@@ -2,6 +2,7 @@
 __pycache__
 node_modules
 shop_website/idea/
+shop_website/image/
 .idea/
 static/
 shop/static/img/
