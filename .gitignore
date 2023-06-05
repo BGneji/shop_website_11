@@ -3,7 +3,7 @@ __pycache__
 node_modules
 shop_website/idea/
 shop_website/image/
-.idea/
+shop_website/.idea/
 static/
 shop/static/img/
 image/sl
