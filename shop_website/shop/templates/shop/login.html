@@ -1,0 +1,38 @@
+{% extends 'shop/base.html' %}
+
+{%block title%}
+{{ title }}
+{% endblock%}
+
+{%block content%}
+
+{% load static %}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img src="{% static 'img/sing_img/Side Image.svg'%}">
+            </div>
+            <div class="create_block">
+                <h2 class="create__title">Log in to Exclusive</h2>
+                <h4 class="create__text">Enter your details below</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <div  class="sing_name"> {{form.non_field_errors}}</div>
+                    {% for f in form %}
+                    <p><label class="sing_name" >{{f.label}} </label>{{ f }}</p>
+                    <div class="form-error">{{ f.errors }}</div>
+                    <p class="create__border"></p>
+                    {% endfor %}
+                    <div class="row btn_login_in justify__content__between">
+                        <button class="btn_login" >Log in</button>
+                        <a class="Forget_text" href="#">Forget Password</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock%}

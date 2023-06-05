@@ -1,0 +1,186 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{%block content%}
+<div>
+    <div class="container cart_row">
+        <div class="row col-12">
+            <a class="cart_text" href="{% url 'home' %}">Home</a>
+            <p class="cart_border">/</p>
+            <a class="cart_text" href="{{products_detail_list.category.get_absolute_url}}">{{products_detail_list.category}}</a>
+            <p class="cart_border">/</p>
+            <p class="cart_text">{{products_detail_list.name}}</p>
+        </div>
+    </div>
+</div>
+<section class="detail_product">
+    <div class="container">
+        <div class="row justify__content__between">
+            <div class="col-2">
+                <ul>
+                    <li class="ul_mini_foto" ><img class="mini_img_product" src="/{{products_detail_list.image1}}"></li>
+                    <li class="ul_mini_foto" ><img class="mini_img_product" src="/{{products_detail_list.image2}}"></li>
+                    <li class="ul_mini_foto" ><img class="mini_img_product" src="/{{products_detail_list.image3}}"></li>
+                    <li class="ul_mini_foto" ><img class="mini_img_product" src="/{{products_detail_list.image4}}"></li>
+                </ul>
+            </div>
+            <div class="col-5">
+                    <img class="max_img_product" src="/{{products_detail_list.image}}">
+            </div>
+            <div class="col-4 poduct_block">
+
+                <ul>
+                    <li class="product_title_text">{{products_detail_list.name}}</li>
+                    <li class="product_title_price">{{products_detail_list.price}}</li>
+                    <li class="product_title_descr">{{products_detail_list.description}}</li>
+                    <li class="create__border"></li>
+                    <li>
+                        <div class="row product_color">
+                            <div>
+                                <p class="color_text">Colours:</p>
+                            </div>
+                            <div class="form_toggle">
+                                <div class="form_toggle-item item-1">
+                                    <input id="fid-1" type="radio" name="radio" value="off" checked>
+                                    <label for="fid-1"></label>
+                                </div>
+                                <div class="form_toggle-item item-2">
+                                    <input id="fid-2" type="radio" name="radio" value="on">
+                                    <label for="fid-2"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+<section>
+            <li class="row size_product_block">
+                <div class="size_product">
+                    <h2>Size:</h2>
+                </div>
+                <div class="row form_radio_btn">
+                    <input id="radio-1" type="radio" name="radio1" value="1">
+                    <label for="radio-1">XS</label>
+                </div>
+
+                <div class="form_radio_btn">
+                    <input id="radio-2" type="radio" name="radio1" value="2">
+                    <label for="radio-2">XS</label>
+                </div>
+
+                <div class="form_radio_btn">
+                    <input id="radio-3" type="radio" name="radio1" value="3">
+                    <label for="radio-3">XS</label>
+                </div>
+
+                <div class="form_radio_btn">
+                    <input id="radio-4" type="radio" name="radio1" value="4">
+                    <label for="radio-4">XS</label>
+                </div>
+                <div class="form_radio_btn">
+                    <input id="radio-5" type="radio" name="radio1" value="5">
+                    <label for="radio-5">XS</label>
+                </div>
+            </li>
+        </section>
+                    <li>
+                        <form  action="{% url 'cart_add' products_detail_list.id %}" method="post">
+                        <div class="row justify__content__between input_block_i ">
+                          <div class="col-6">
+                              <a class="quantity_inner text_btnpm" > {{ cart_product_form }} </a>
+                              {% csrf_token %}
+                          </div>
+                             <div class="col-6">
+                                 <input class="btn_buy" type="submit" value="Buy Now">
+                             </div>
+                        </div>
+                        </form>
+                    </li>
+                    <li class="border_return">
+                        <div class="row justify__content__around blokc_dost">
+                            <div>
+                                <img src="{%  static 'img/Icon-return.png' %}" alt="">
+                            </div>
+                            <div>
+                                <p class="text_dostavka1">Free Delivery</p>
+                                <p class="text_dostavka2">Enter your postal code for Delivery Availability</p>
+                            </div>
+                        </div>
+                        <div class="border_return_delivery">
+
+                        </div>
+                        <div class="row justify__content__around blokc_dost">
+                            <div>
+                                <img src="{% static 'img/icon-delivery.png' %}" alt="">
+                            </div>
+                            <div>
+                                <p class="text_dostavka1">Free Delivery</p>
+                                <p class="text_dostavka2">Enter your postal code for Delivery Availability</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row block_item">
+        <p class="red_block"></p>
+        <p class="today_text">Related Item</p>
+    </div>
+</div>
+<div class="otstup">
+
+</div>
+
+<section class="slider2_product">
+    <div class="container">
+        <div class="product-container">
+
+
+            {% for productcard in products %}
+            <div class="product-card_first">
+                <div class="product-image">
+                    <div class="row">
+                        <div class="col-12 info_product">
+                            <a class="info_a" href="{{productcard.get_absolute_url}}">
+                                <img src="/image/1FillEye.png">
+
+                            </a>
+                        </div>
+                        <div class="col-12 info_img">
+                            <img class="product-thumb" src="/{{ productcard.image }}" alt="">
+                        </div>
+                    </div>
+
+                     <form  action="{% url 'cart_add' products_detail_list.id %}" method="post">
+
+
+                         <div class="dis_none"><a class="quantity_inner text_btnpm" > {{ cart_product_form }} </a></div>
+                         {% csrf_token %}
+                         <input class="card-btn" type="submit" value="Add To Cart">
+
+
+                     </form>
+
+
+
+
+                </div>
+
+                <h2 class="product-name">{{productcard.name}}</h2>
+
+                <div class="product-prize">
+                    <p class="product-prize-1">{{productcard.price}}</p>
+                    <p class="product-prize-2"><strike>{{productcard.last_price}}</strike></p>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock%}

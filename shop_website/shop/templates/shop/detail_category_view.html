@@ -1,0 +1,58 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{%block content%}
+
+{{products_detail_list}}
+
+<div>
+    <div class="container cart_row">
+        <div class="row col-12">
+            <a class="cart_text" href="{% url 'home' %}">Home</a>
+            <p class="cart_border">/</p>
+            <!--срез по первое число-->
+            {% for i in categories_product_list|slice:":1" %}
+            <p class="cart_text">{{ i.category}}</p>
+            {% endfor %}
+            <a class="cart_text" href="{{products_detail_list.category.get_absolute_url}}">{{products_detail_list.category}}</a>
+        </div>
+    </div>
+</div>
+
+<section class="slider2_product">
+    <div class="container  slider2_product">
+        <div class="product-container justify__content__between">
+            {% for productcard in categories_product_list %}
+            <div class="product-card_first">
+                <div class="product-image">
+                    <div class="row">
+                        <div class="col-12 info_product">
+                            <a class="info_a" href="{{productcard.get_absolute_url}}">
+                                <img src="/image/1FillEye.png">
+                            </a>
+                        </div>
+                        <div class="col-12 info_img">
+                            <img class="product-thumb" src="/{{ productcard.image }}" alt="">
+                        </div>
+                    </div>
+                    <form  action="{% url 'cart_add' productcard.id %}" method="post">
+                         <a class="quantity_inner dis_none text_btnpm" > {{ cart_product_form }} </a>
+                         {% csrf_token %}
+                         <input class="card-btn" type="submit" value="Add To Cart">
+                     </form>
+                </div>
+                <h2 class="product-name">{{productcard.name}}</h2>
+                <div class="product-prize">
+                    <p class="product-prize-1">${{productcard.price}}</p>
+                    <p class="product-prize-2"><strike>${{productcard.last_price}}</strike></p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="border_categori">
+            <span></span>
+        </div>
+    </div>
+</section>
+{% endblock%}

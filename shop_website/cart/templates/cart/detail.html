@@ -1,0 +1,143 @@
+{% extends 'shop/base.html' %} наследуем параметры от базывого html
+{% load static %}
+
+{% block title %}
+  Страница корзины
+{% endblock %}
+
+{% block content %}
+
+<link href="{% static 'css/cart.css' %}" rel="stylesheet"/>
+
+<section>
+
+        <div class="container cart_row">
+            <div class="row col-auto">
+                <a class="cart_text" href="{% url 'home' %}">Home</a>
+                <p class="cart_border">/</p>
+                <p class="cart_text">Cart</p>
+            </div>
+        </div>
+
+
+        </div>
+        <div class="container cart_name_block">
+            <div class="row justify__content__between item_shadow_top">
+                <div class="row">
+                    <div class="row col-auto cart_item ">
+                        <p>Product</p>
+
+                    </div>
+                </div>
+                <div class="row col-8 justify__content__between cart_item">
+                <div class="col-auto ">
+                    <p>Price</p>
+                </div>
+                <div class="col-auto ">
+                    <p>Quantity</p>
+                </div>
+                <div class="col-auto ">
+                    <p>Subtotal</p>
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+        {% for item in cart %}
+                  {% with product=item.product %}
+        <div class="container">
+            <div class="row justify__content__between item_shadow">
+
+                <div class="row">
+
+
+                    <div class="row  col-auto cart_item">
+                        <img class="cart_img" src="{% if product.image %}{{ product.image.url }}
+                          {% else %}{% static "img/no_image.png" %}{% endif %}">
+                        <p class="text_img_cart">{{ product.name }}</p>
+
+                    </div>
+                </div>
+                <div class="row col-8 justify__content__between">
+                    <div class="col-auto cart_item ">
+                        <p>{{ product.price }}</p>
+                    </div>
+                    <div class="col-auto cart_item ">
+                       <form action="{% url "cart_add" product.id %}" method="post">
+                {{ item.update_quantity_form.quantity }}
+                {{ item.update_quantity_form.override }}
+                <input type="submit" value="Update">
+                {% csrf_token %}
+              </form>
+                        <form action="{% url "cart_remove" product.id %}" method="post">
+                <input type="submit" value="Remove">
+                {% csrf_token %}
+              </form>
+                    </div>
+
+                    <div class="col-auto cart_item">
+                        <p>{{ item.total_price }}</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+      {% endwith %}
+    {% endfor %}
+    </section>
+
+
+
+        <div class="container">
+            <div class="row justify__content__between  block_cart_total">
+
+                    <div class="row">
+                        <div class="col-auto">
+                            <input class="cat_coupon" placeholder="Coupon Code">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn_cat_coupon">Apply Coupon</button>
+                        </div>
+                    </div>
+
+
+
+                <div class="block_total">
+                    <div class="col-auto Cart_Total ">
+                        <h3 class="Total_h">Cart Total</h3>
+                    </div>
+                    <div class="row justify__content__between">
+                        <div class=" col-auto Cart_Total">Subtotal:</div>
+
+
+                        <div class="col-auto Cart_Total"><p>{{ cart.get_total_price }}</p></div>
+
+
+                    </div>
+                    <div class="cart_border_code"></div>
+                    <div class="row justify__content__between">
+                        <div class="col-auto Cart_Total"><p>Shipping:</p></div>
+                        <div class="col-auto Cart_Total"><p>Fee</p></div>
+                    </div>
+                    <div class="cart_border_code"></div>
+                    <div class="row justify__content__between">
+                        <div class="col-auto Cart_Total"><p>Total</p></div>
+                        <div class="col-auto Cart_Total"><p>{{ cart.get_total_price }}</p></div>
+                    </div>
+                    <div class="row col-12 justify__content__center">
+                        <a class="btn_cat_total" href="{% url "order_create" %}">
+                           Procees to checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+{% endblock %}

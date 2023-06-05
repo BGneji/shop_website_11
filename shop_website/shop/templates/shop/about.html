@@ -1,0 +1,131 @@
+{% extends 'shop/base.html' %} наследуем параметры от базывого html
+{%block title%}
+{{ title }}
+{% endblock%}
+
+{%block content%}
+{% load static %}
+
+<section>
+    <div class="container cart_row">
+        <div class="row col-12">
+            <a class="cart_text" href="{% url 'home' %}">Home</a>
+            <p class="cart_border">/</p>
+            <p class="cart_text">About</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify__content__between">
+            <div class="col-6 block_about_text">
+                <div>
+                    {% for elimg  in about_company_user_list%}
+                    <h2 class="about_h2">{{elimg.title}}</h2>
+                    <div class="col-9 about_img">
+                    <p class="about_p">{{elimg.description}}
+                    </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <img class="about_img" src="{{elimg.image}}">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+
+    <div class="container">
+        <div class="row justify__content__between block_about_container">
+            <div class="col-2 about_block">
+                <div>
+                    <img class="img_about_item" src="{% static 'img/about/Ellipse 6.png' %}" alt="">
+                    <p class="numbers_item">10.5</p>
+                    <p class="text_about">Sallers active our site</p>
+                </div>
+
+            </div>
+            <div class="col-2 about_block">
+                <div>
+                    <img class="img_about_item" src="{% static 'img/about/Ellipse 6.png' %}" alt="">
+                    <p class="numbers_item">10.5</p>
+                    <p class="text_about">Sallers active our site</p>
+                </div>
+
+            </div>
+            <div class="col-2 about_block">
+                <div>
+                    <img class="img_about_item" src="{% static 'img/about/Ellipse 6.png' %}" alt="">
+                    <p class="numbers_item">10.5</p>
+                    <p class="text_about">Sallers active our site</p>
+                </div>
+
+            </div>
+            <div class="col-2 about_block">
+                <div>
+                    <img class="img_about_item" src="{% static 'img/about/Ellipse 6.png' %}" alt="">
+                    <p class="numbers_item">10.5</p>
+                    <p class="text_about">Sallers active our site</p>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row justify__content__between">
+            <div class="col-auto">
+
+                <img class="staf_img" src="{% static 'img/about/Frame 874.png' %}" alt="">
+                <p class="staff_name">Tom Cruise</p>
+                <p class="staff_post">Founder & Chairman</p>
+
+
+            </div>
+            <div class="col-auto">
+                <img class="staf_img" src="{% static 'img/about/Frame 874.png' %}" alt="">
+                <p class="staff_name">Tom Cruise</p>
+                <p class="staff_post">Founder & Chairman</p>
+
+
+            </div>
+            <div class="col-auto">
+                <img class="staf_img" src="{% static 'img/about/Frame 874.png' %}" alt="">
+                <p class="staff_name">Tom Cruise</p>
+                <p class="staff_post">Founder & Chairman</p>
+
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="service">
+    <div class="container">
+        <div class="row justify__content__center">
+            <div class="col-auto block_about_service">
+                <img class="1" src="{% static 'img/about/Services.png' %}" alt="">
+                <p class="service_name">FREE AND FAST DELIVERY</p>
+                <p class="service_post">Free delivery for all orders over $140</p>
+            </div>
+            <div class="col-auto block_about_service">
+                <img class="1" src="{% static 'img/about/Services (1).png' %}" alt="">
+                <p class="service_name">FREE AND FAST DELIVERY</p>
+                <p class="service_post">Free delivery for all orders over $140</p>
+            </div>
+            <div class="col-auto block_about_service">
+                <img class="1" src="{% static 'img/about/Services (2).png' %}" alt="">
+                <p class="service_name">FREE AND FAST DELIVERY</p>
+                <p class="service_post">Free delivery for all orders over $140</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock%}

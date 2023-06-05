@@ -1,0 +1,192 @@
+{% extends 'shop/base.html' %} наследуем параметры от базывого html
+{%block title%}
+{{ title }}
+{% endblock%}
+
+{%block content%}
+{% load static %}
+
+
+
+
+<section class="section_one">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <ul>
+                    <li class="list_v__item"><a class="list_v__link" href="#">Woman’s Fashion</a></li>
+                    <li class="list_v__item"><a class="list_v__link" href="#">Men’s Fashion</a></li>
+                    <li class="list_v__item"><a class="list_v__link" href="#">Electronics</a></li>
+                    <li class="list_v__item"><a class="list_v__link" href="#">Home & Lifestyle</a></li>
+                    <li class="list_v__item"><a class="list_v__link" href="#">Medicine</a></li>
+                    <li class="list_v__item"><a class="list_v__link" href="#">Sports & Outdoor</a></li>
+                    <li class="list_v__item"><a class="list_v__link" href="#">Baby’s & Toys</a></li>
+                    <li class="list_v__item"><a class="list_v__link" href="#">Groceries & Pets</a></li>
+                    <li class="list_v__item_last"><a class="list_v__link" href="#">Health & Beauty</a></li>
+                </ul>
+            </div>
+            <div class="col-9">
+                <div class="slideshow-container">
+                    {% for el in sliders %}
+                    <div class="mySlides fabe">
+                        <img src="{{el.image}}" alt="" width="100%">
+                    </div>
+                    {% endfor %}
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row block_item">
+            <p class="red_block"></p>
+            <p class="today_text">Today’s</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify__content__between">
+            <div class="col-auto text_padding">
+                <p class="sales_item">Flash Sales</p>
+            </div>
+            <div class="col-auto countdown-wrapper">
+                <div id="group" class="row justify__content__between">
+                    <div class="countdown_item">
+                        <p class="countdown_text">Days</p>
+                        <span id="d" class="badge badge_success mr-3 p-3">00</span>
+                    </div>
+                    <div class="countdown_item">
+                        <p class="countdown_text">Hours</p>
+                        <span id="h" class="badge badge_success p-3 mr-3">00</span>
+                    </div>
+                    <div class="countdown_item">
+                        <p class="countdown_text">Minutes</p>
+                        <span id="m" class="badge badge_success mr-3 p-3">00</span>
+                    </div>
+                    <div class="countdown_item">
+                        <p class="countdown_text">Seconds</p>
+                        <span id="s" class="badge badge_success p-3">00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 slider2_item">
+                <button class="slider-prev"></button>
+                <button class="slider-next"></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="slider2_product">
+    <div class="container  slider2_product">
+        <div class="product-container justify__content__between">
+            {% for productcard in products1 %}
+            <div class="product-card_first">
+                <div class="product-image">
+                    <div class="row">
+                        <div class="col-12 info_product">
+                            <a class="info_a" href="{{productcard.get_absolute_url}}">
+                                <img src="image/1FillEye.png">
+                            </a>
+                        </div>
+                        <div class="col-12 info_img">
+                            <img class="product-thumb" src="{{ productcard.image.url }}" alt="">
+                        </div>
+                    </div>
+                     <form  action="{% url 'cart_add' productcard.id %}" method="post">
+                         <a class="quantity_inner dis_none text_btnpm" > {{ cart_product_form }} </a>
+                         {% csrf_token %}
+                         <input class="card-btn" type="submit" value="Add To Cart">
+                     </form>
+                </div>
+                <h2 class="product-name">{{productcard.name}}</h2>
+                <div class="product-prize">
+                    <p class="product-prize-1">{{productcard.price}}</p>
+                    <p class="product-prize-2"><strike>{{productcard.last_price}}</strike></p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="border_categori">
+            <span></span>
+        </div>
+    </div>
+</section>
+
+<section class="slider2_product">
+    <div class="container">
+        <div class="row block_item">
+            <p class="red_block"></p>
+            <p class="today_text">Categories</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-auto text_padding">
+            <p class="sales_item">Browse By Category</p>
+        </div>
+    </div>
+    <div class="container ">
+        <div class="row justify__content__between categories_row">
+            {% for categ in categoris %}
+            <div class="categories_okno">
+                <div>
+                    <a href="{{ categ.get_absolute_url }}">
+                        <img class="img_categories" src="{{categ.image.url}}"></a>
+                    <p class="img_text">{{categ.slug}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <div class="border_categori">
+            <span></span>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row block_item">
+            <p class="red_block"></p>
+            <p class="today_text">This Month</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-auto text_padding">
+            <p class="sales_item"> Best Selling Products</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="product-container justify__content__between">
+            {% for el in bestselling %}
+            {% if el.is_published %}
+            <div class="product-card_first">
+                <div class="product-image info_img_1">
+                    <div class="info_img ">
+                        <img src="{{ el.image.url }}" class="product-thumb" alt="">
+                    </div>
+                </div>
+                <div>
+                    <h2 class="product-name">{{el.title}}</h2>
+                    <div class="product-prize">
+                        <p class="product-prize-1">{{el.price}}</p>
+                        <p class="product-prize-2"><strike>{{el.past_price}}</strike></p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock%}

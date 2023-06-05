@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %} {{title}} {% endblock%}</title>
+
+    {% load static %}
+    <link href="{% static 'css/reset.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/setka.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/92d70a2fd8.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<header class="header">
+    <nav class="nav">
+        <div class="container">
+            <div class="row justify__content__between nav__row">
+                <div class="col-auto">
+                    <img class="nav_img" src="{% static 'img/logo_Exclusive.svg' %}">
+                </div>
+                <div class="col-auto">
+                    <ul>
+                        <li class="nav__item">
+                            <a class="nav__link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav__item"><a class="nav__link" href="#">Contact</a></li>
+                        <li class="nav__item"><a class="nav__link" href="{% url 'about' %}">About</a></li>
+                        <li class="nav__item"><a class="nav__link" href="{% url 'singup' %}">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="row nav__row">
+                    <div class="col-auto nav_input_block">
+                        <input class="nav_input" placeholder="What are you looking for?">
+                        <i class="fa-solid fa-magnifying-glass glass"></i>
+                    </div>
+                    <div class="col-auto wishlist_blok nav__link1">
+                        <a href="#"><img src="{% static 'img/Cart1  Wishlist.svg'%}"></a>
+                        {% with total_items=cart|length %}
+                             {% if total_items > 0 %}
+                             <a class="nav__link1" href="#">
+                             {{ cart.get_total_price }}
+                             </a>
+                             {% else %}
+                            <a href="{% url 'cart_detail' %}"><img src="{% static 'img/Cart1 with buy.svg'%}"></a>
+                             {% endif %}
+                        {% endwith %}
+
+                    </div>
+                    <div>
+                    {% if request.user.is_authenticated %}
+                        <div class="nav_drop-down">
+                        <img class="dropbutton" src="{% static 'img/user.svg'%}">
+                        <div class="drop-down">
+                            <a href="#">{{ user.username}}</a>
+                            <a href="{% url 'cart_detail' %}">Корзина</a>
+                            <a href="{% url 'logout' %}"> Выйти </a>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div></div>
+                   {% endif %}
+                        </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="border_nav1"></div>
+{% block content %}
+
+{% endblock%}
+<footer class="footer">
+    <div class="container">
+        <div class="row justify__content__between">
+            <div class="col-auto">
+                <h2 class="footer__title">Exclusive</h2>
+                <ul>
+                    <li class="footer_li_item"><a class="footer__txt" href="#">Subscribe</a></li>
+                    {% for el in discounts %}
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">Get {{el.firstorder}}% off your first order</a></li>
+                    {% endfor %}
+                    <li class="footer_li_item"><a class="footer__txt" href="#">Forest</a></li>
+                </ul>
+            </div>
+            <div class="col-auto">
+                <h2 class="footer__title">Support</h2>
+                <ul>
+                     {% for el in address %}
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">{{el.index}} {{el.country}} {{el.city}} <br>{{el.street}} <br>
+                        </a></li>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">{{el.email}} </a></li>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">{{el.phone}}</a></li>
+                     {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-auto">
+                <h2 class="footer__title">Account</h2>
+                <ul>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">My Account</a></li>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="{% url 'cart_detail' %}">Cart</a></li>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">Wishlist</a></li>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">Shop</a></li>
+                </ul>
+            </div>
+
+            <div class="col-auto">
+                <h2 class="footer__title">Quick Link</h2>
+                <ul>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">Privacy Policy</a></li>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="{% url 'about' %}">Terms Of Use</a></li>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">FAQ</a></li>
+                    <li class="footer_li_item"><a class="footer__txt_3" href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="col-auto">
+                <h2 class="footer__title">Download App</h2>
+                {% for el in discounts %}
+                <p class="footer__txt_end">Save {{el.appdiscounts}} with App New User Only </p>
+                {% endfor %}
+                <ul class="footer__soc">
+
+                    <li class="footer__item"><a href=""><img src="{% static 'img/soc/1.svg' %}"/></a></li>
+                    <li class="footer__item"><a href=""><img src="{% static 'img/soc/3.svg' %}"/></a></li>
+                    <li class="footer__item"><a href=""><img src="{% static 'img/soc/4.svg' %}"/></a></li>
+                    <li class="footer__item"><a href=""><img src="{% static 'img/soc/5.svg' %}"/></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row justify__content__center">
+            <p class="footer__cop">Copyright Rimel 2023. All right reserved</p>
+        </div>
+    </div>
+</footer>
+
+<script src="{% static 'js/js.js' %}"></script>
+</body>
+</html>

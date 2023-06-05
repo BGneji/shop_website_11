@@ -1,0 +1,70 @@
+{% extends 'shop/base.html' %}
+
+{%block title%}
+{{ title }}
+{% endblock%}
+
+{%block content%}
+{% load static %}
+<!--<div class="container">-->
+<!--    <form method="post">-->
+<!--    {% csrf_token %}-->
+<!--{% for f in form %}-->
+<!--<p><label class="sing_name" for="{{ f.id_for_label }}">{{f.label}} </label>{{ f }}</p>-->
+<!--<div class="form-error">{{ f.errors }}</div>-->
+<!--{% endfor %}-->
+
+<!--    <button type="submit">Регистрация</button>-->
+<!--</form>-->
+<!--</div>-->
+
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img src="{% static 'img/sing_img/Side Image.svg' %}">
+            </div>
+            <div class="create_block">
+                <h2 class="create__title">Create an account</h2>
+                <h4 class="create__text">Enter your details below</h4>
+                <ul>
+                    <div>
+                        <form method="post">
+                    {% csrf_token %}
+                    {% for c in form %}
+                    <p><label class="sing_name" for="{{ f.id_for_label }}">{{c.label}} </label>{{ c }}</p>
+                    <div class="form-error">{{ c.errors }}</div>
+                        <li class="create__border"></li>
+<!--                    <li><input class="sing_name" type="text" placeholder="Email or Phone Number"></li>-->
+<!--                    <li class="create__border"></li>-->
+<!--                    <li><input class="sing_name" type="text" placeholder="Password"></li>-->
+<!--                    <li class="create__border"></li>-->
+<!--                    <li><input class="sing_name" type="text" placeholder="Password Confirmation"></li>-->
+<!--                    <li class="create__border"></li>-->
+                    {% endfor %}
+                        <button class="btn_create">Create account</button>
+                        </form>
+                     </div>
+                    <li>
+
+                    </li>
+                    <li>
+                        <div class="btn_sign">
+                            <img class="btn_sign_img_google" src="{%static 'img/social/Icon-Google.svg' %}">
+                            <button class="btn_sign_item">Sign up with Google</button>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="row btn_sign_go justify__content__center">
+                            <p class="btn_sign_go_text">Already have account?</p>
+                            <a class="btn_sign_go_item" href="{% url 'login' %}">Log In</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock%}

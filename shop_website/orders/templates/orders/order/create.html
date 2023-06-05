@@ -1,0 +1,66 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+  Checkout
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<link href="{% static 'css/order.css' %}" rel="stylesheet"/>
+{{cart.first_name}}
+<div class="container">
+    <div class="row">
+        <div class="col-12 block_billing">
+            <h1>Billing Details</h1>
+        </div>
+        <div class="col-5">
+             <form method="post">
+                {{ form.as_p }}
+                <p><input type="submit" value="Place order"></p>
+                {% csrf_token %}
+            </form>
+        </div>
+
+        <div class="col-7 ">
+            <div class="row col-12 justify__content__between item_name">
+                    <p></p>
+                    <p>quantity</p>
+                    <p>name</p>
+                    <p>price</p>
+            </div>
+                  {% for item in cart %}
+            <div class="row  block_zakaz justify__content__between">
+                <div class="col-auto img_order_item">
+                    <div class="img_order_block">
+                        <img   class="img_order" src="/{{item.product.image}}">
+                    </div>
+                </div>
+
+                        <div class="col-auto item_name">
+                            {{ item.quantity }}
+                        </div>
+
+                        <div class="col-6  item_name">
+                            {{ item.product.name }}
+                        </div>
+                <div class="col-auto item_name">
+                    {{ item.total_price }}
+
+                </div>
+
+
+            </div>
+
+                  {% endfor %}
+            <div class="totel_price">
+                <p>Total: {{ cart.get_total_price }}</p>
+            </div>
+
+
+
+    </div>
+</div>
+    </div>
+
+{% endblock%}
