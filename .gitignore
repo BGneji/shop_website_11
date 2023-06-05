@@ -1,8 +1,8 @@
-
+.idea/
 __pycache__
 node_modules
 shop_website/idea/
-shop_website/image/
+image/
 shop_website/.idea/
 static/
 shop/static/img/
