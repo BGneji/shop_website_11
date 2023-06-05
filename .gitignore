@@ -1,4 +1,6 @@
 .idea/
+shop_website/image/
+shop_website/static/
 __pycache__
 node_modules
 shop_website/idea/
