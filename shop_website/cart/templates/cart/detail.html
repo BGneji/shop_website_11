@@ -1,3 +1,4 @@
+
 {% extends 'shop/base.html' %} наследуем параметры от базывого html
 {% load static %}
 
@@ -91,50 +92,51 @@
 
 
 
-        <div class="container">
-            <div class="row justify__content__between  block_cart_total">
-
-                    <div class="row">
-                        <div class="col-auto">
-                            <input class="cat_coupon" placeholder="Coupon Code">
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn_cat_coupon">Apply Coupon</button>
-                        </div>
-                    </div>
+<div class="container">
+    <div class="row justify__content__between  block_cart_total">
+        <form action="{% url "apply" %}" method="post">
+        {{ coupon_apply_form }}
+            <input type="submit" value="Apply">
+            {% csrf_token %}
+        </form>
 
 
 
-                <div class="block_total">
-                    <div class="col-auto Cart_Total ">
-                        <h3 class="Total_h">Cart Total</h3>
-                    </div>
-                    <div class="row justify__content__between">
-                        <div class=" col-auto Cart_Total">Subtotal:</div>
 
 
-                        <div class="col-auto Cart_Total"><p>{{ cart.get_total_price }}</p></div>
 
 
-                    </div>
-                    <div class="cart_border_code"></div>
-                    <div class="row justify__content__between">
-                        <div class="col-auto Cart_Total"><p>Shipping:</p></div>
-                        <div class="col-auto Cart_Total"><p>Fee</p></div>
-                    </div>
-                    <div class="cart_border_code"></div>
-                    <div class="row justify__content__between">
-                        <div class="col-auto Cart_Total"><p>Total</p></div>
-                        <div class="col-auto Cart_Total"><p>{{ cart.get_total_price }}</p></div>
-                    </div>
-                    <div class="row col-12 justify__content__center">
-                        <a class="btn_cat_total" href="{% url "order_create" %}">
-                           Procees to checkout
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="block_total">
+    <div class="col-auto Cart_Total ">
+    <h3 class="Total_h">Cart Total</h3>
+    </div>
+    <div class="row justify__content__between">
+    <div class=" col-auto Cart_Total">Subtotal:</div>
+
+
+    <div class="col-auto Cart_Total"><p>{{ cart.get_total_price }}</p></div>
+
+
+    </div>
+    <div class="cart_border_code"></div>
+    <div class="row justify__content__between">
+    <div class="col-auto Cart_Total"><p>coupon ({{ cart.coupon.discount }}% off)</p></div>
+    <div class="col-auto Cart_Total"><p>{{ cart.get_discount|floatformat:2 }}</p></div>
+
+    </div>
+
+    <div class="cart_border_code"></div>
+    <div class="row justify__content__between">
+    <div class="col-auto Cart_Total"><p>Total</p></div>
+    <div class="col-auto Cart_Total"><p>{{ cart.get_total_price_after_discount|floatformat:2 }}</p></div>
+    </div>
+    <div class="row col-12 justify__content__center">
+    <a class="btn_cat_total" href="{% url "order_create" %}">
+    Procees to checkout
+    </a>
+    </div>
+    </div>
+</div>
 
 
 

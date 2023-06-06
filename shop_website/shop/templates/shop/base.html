@@ -40,7 +40,7 @@
                         {% with total_items=cart|length %}
                              {% if total_items > 0 %}
                              <a class="nav__link1" href="#">
-                             {{ cart.get_total_price }}
+                             {{ cart.get_total_price_after_discount|floatformat:2 }}
                              </a>
                              {% else %}
                             <a href="{% url 'cart_detail' %}"><img src="{% static 'img/Cart1 with buy.svg'%}"></a>

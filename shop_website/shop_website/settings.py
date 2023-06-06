@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'coupons.apps.CouponsConfig',
 
 
 
